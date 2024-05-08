@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Runner.tscn" type="PackedScene" id=1]
+
+[node name="Runners" type="Node2D" groups=["grouped_runners"]]
+
+[node name="Runner" parent="." instance=ExtResource( 1 )]
+position = Vector2( -210, 58 )
+
+[node name="Runner2" parent="." instance=ExtResource( 1 )]
+position = Vector2( -188, 58 )
+speed = 9
+
+[node name="Runner3" parent="." instance=ExtResource( 1 )]
+position = Vector2( -166, 58 )
+speed = 8
+
+[node name="Runner4" parent="." instance=ExtResource( 1 )]
+position = Vector2( -144, 58 )
+speed = 7
+
+[node name="Runner5" parent="." instance=ExtResource( 1 )]
+position = Vector2( -122, 58 )
+speed = 6
+
+[node name="Runner6" parent="." instance=ExtResource( 1 )]
+position = Vector2( -100, 58 )
+speed = 5
+
+[node name="Runner7" parent="." instance=ExtResource( 1 )]
+position = Vector2( -78, 58 )
+speed = 4
+
+[node name="RunnerWanton" parent="." instance=ExtResource( 1 )]
+position = Vector2( -56, 58 )
+speed = 3
+is_wanton = true

@@ -1,0 +1,73 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Runner",
+"language": "GDScript",
+"path": "res://Runner.gd"
+}, {
+"base": "Node2D",
+"class": "RunnerConfigs",
+"language": "GDScript",
+"path": "res://RunnerConfigs.gd"
+}, {
+"base": "Node2D",
+"class": "Snap",
+"language": "GDScript",
+"path": "res://Snap.gd"
+}, {
+"base": "Area2D",
+"class": "Trap",
+"language": "GDScript",
+"path": "res://Trap.gd"
+} ]
+_global_script_class_icons={
+"Runner": "",
+"RunnerConfigs": "",
+"Snap": "",
+"Trap": ""
+}
+
+[application]
+
+config/name="Wanton Runner"
+run/main_scene="res://Race.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+GlobalVariables="*res://GlobalVariables.gd"
+
+[display]
+
+window/size/width=640
+window/size/height=360
+window/size/test_width=1280
+window/size/test_height=720
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+2d/snapping/use_gpu_pixel_snap=true
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.101961, 0.133333, 0.101961, 1 )
+environment/default_environment="res://default_env.tres"

@@ -1,0 +1,729 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://textures/background.png" type="Texture" id=1]
+[ext_resource path="res://textures/car_pickup.png" type="Texture" id=2]
+[ext_resource path="res://textures/killer.png" type="Texture" id=3]
+[ext_resource path="res://textures/money_bag.png" type="Texture" id=4]
+[ext_resource path="res://FinishLine.gd" type="Script" id=5]
+[ext_resource path="res://CellSelector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://textures/spikes.png" type="Texture" id=7]
+[ext_resource path="res://VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Buy.gd" type="Script" id=9]
+[ext_resource path="res://Price.gd" type="Script" id=10]
+[ext_resource path="res://BlockedCell.tscn" type="PackedScene" id=11]
+[ext_resource path="res://StartRace.gd" type="Script" id=12]
+[ext_resource path="res://textures/logo.png" type="Texture" id=13]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 32
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 24
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 19
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 0 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = ExtResource( 8 )
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 11, 46 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 134, 17.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 123, 17.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 158, 17.5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 105 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 9.5, 114.5 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 10, 35 )
+
+[node name="Race" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Square" type="Panel" parent="HUD"]
+margin_right = 360.0
+margin_bottom = 360.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Victory" type="Label" parent="HUD/Square"]
+margin_left = 23.0
+margin_top = 162.0
+margin_right = 338.0
+margin_bottom = 197.0
+custom_fonts/font = SubResource( 15 )
+align = 1
+valign = 1
+
+[node name="Rec" type="Panel" parent="HUD"]
+margin_left = 357.0
+margin_right = 640.0
+margin_bottom = 360.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Logo" type="Sprite" parent="HUD/Rec"]
+position = Vector2( 142.496, 66.4921 )
+scale = Vector2( 1.99281, 1.98413 )
+texture = ExtResource( 13 )
+
+[node name="SeparatorWanton" type="Panel" parent="HUD/Rec"]
+margin_left = 3.0
+margin_top = 128.0
+margin_right = 280.0
+margin_bottom = 131.0
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Money" type="Label" parent="HUD/Rec"]
+margin_left = 41.0
+margin_top = 141.0
+margin_right = 80.0
+margin_bottom = 166.0
+custom_colors/font_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+custom_fonts/font = SubResource( 11 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GoButton" type="Panel" parent="HUD/Rec"]
+margin_left = 172.0
+margin_top = 141.0
+margin_right = 241.0
+margin_bottom = 163.0
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 12 )
+script = ExtResource( 12 )
+
+[node name="Go" type="Label" parent="HUD/Rec/GoButton"]
+margin_right = 69.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 0.101961, 0.133333, 0.101961, 1 )
+custom_fonts/font = SubResource( 13 )
+align = 1
+valign = 1
+
+[node name="SeparatorShop" type="Panel" parent="HUD/Rec"]
+margin_left = 41.0
+margin_top = 167.0
+margin_right = 241.0
+margin_bottom = 170.0
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="buy_spikes" type="Panel" parent="HUD/Rec"]
+anchor_right = 0.275
+margin_left = 42.0
+margin_top = 206.0
+margin_right = 64.175
+margin_bottom = 266.0
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 9 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spikes" type="Sprite" parent="HUD/Rec/buy_spikes"]
+position = Vector2( 30.688, 15.344 )
+scale = Vector2( 1.54775, 1.54775 )
+texture = ExtResource( 7 )
+hframes = 3
+
+[node name="Price" type="Label" parent="HUD/Rec/buy_spikes"]
+margin_left = 57.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 57.0
+custom_colors/font_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+custom_fonts/font = SubResource( 10 )
+align = 1
+valign = 1
+
+[node name="buy_killer" type="Panel" parent="HUD/Rec"]
+anchor_right = 0.275
+margin_left = 142.0
+margin_top = 206.0
+margin_right = 164.175
+margin_bottom = 266.0
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 9 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Killer" type="Sprite" parent="HUD/Rec/buy_killer"]
+position = Vector2( 31, 31 )
+scale = Vector2( 1.54775, 1.54775 )
+texture = ExtResource( 3 )
+hframes = 2
+
+[node name="Price" type="Label" parent="HUD/Rec/buy_killer"]
+margin_left = 57.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 57.0
+custom_colors/font_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+custom_fonts/font = SubResource( 10 )
+align = 1
+valign = 1
+
+[node name="buy_money_bag" type="Panel" parent="HUD/Rec"]
+anchor_right = 0.275
+margin_left = 42.0
+margin_top = 266.0
+margin_right = 64.175
+margin_bottom = 326.0
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 9 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MoneyBag" type="Sprite" parent="HUD/Rec/buy_money_bag"]
+position = Vector2( 31, 27 )
+scale = Vector2( 1.54775, 1.54775 )
+texture = ExtResource( 4 )
+
+[node name="Price" type="Label" parent="HUD/Rec/buy_money_bag"]
+margin_left = 57.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 57.0
+custom_colors/font_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+custom_fonts/font = SubResource( 10 )
+align = 1
+valign = 1
+
+[node name="buy_car_pickup" type="Panel" parent="HUD/Rec"]
+anchor_right = 0.275
+margin_left = 142.0
+margin_top = 266.0
+margin_right = 164.175
+margin_bottom = 326.0
+mouse_default_cursor_shape = 2
+custom_styles/panel = SubResource( 9 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CarPickup" type="Sprite" parent="HUD/Rec/buy_car_pickup"]
+position = Vector2( 31, 17 )
+scale = Vector2( 1.54775, 1.54775 )
+texture = ExtResource( 2 )
+
+[node name="Price" type="Label" parent="HUD/Rec/buy_car_pickup"]
+margin_left = 57.0
+margin_top = 3.0
+margin_right = 97.0
+margin_bottom = 57.0
+custom_colors/font_color = Color( 0.133333, 0.694118, 0.298039, 1 )
+custom_fonts/font = SubResource( 10 )
+align = 1
+valign = 1
+
+[node name="BackgroundTest" type="Sprite" parent="."]
+position = Vector2( 180, 180 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Collisions" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ZeroWall" type="StaticBody2D" parent="Collisions"]
+position = Vector2( -266, 57 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/ZeroWall"]
+position = Vector2( 8.5, -11 )
+shape = SubResource( 14 )
+
+[node name="ZeroPlatform" type="StaticBody2D" parent="Collisions"]
+position = Vector2( -268, 92 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/ZeroPlatform"]
+position = Vector2( 134, 17.5 )
+shape = SubResource( 2 )
+
+[node name="FirstPlatform" type="StaticBody2D" parent="Collisions"]
+position = Vector2( 0, 92 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/FirstPlatform"]
+position = Vector2( 134, 17.5 )
+shape = SubResource( 2 )
+
+[node name="SecondPlatform" type="StaticBody2D" parent="Collisions"]
+position = Vector2( 93, 197 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/SecondPlatform"]
+position = Vector2( 123, 17.5 )
+shape = SubResource( 3 )
+
+[node name="ThirdPlatform" type="StaticBody2D" parent="Collisions"]
+position = Vector2( 22, 302 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/ThirdPlatform"]
+position = Vector2( 158, 17.5 )
+shape = SubResource( 4 )
+
+[node name="WallLeft" type="StaticBody2D" parent="Collisions"]
+position = Vector2( 3, 127 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/WallLeft"]
+position = Vector2( 10, 105 )
+shape = SubResource( 5 )
+
+[node name="WallRight" type="StaticBody2D" parent="Collisions"]
+position = Vector2( 338, 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/WallRight"]
+position = Vector2( 9.5, 114.5 )
+shape = SubResource( 6 )
+
+[node name="BlockedCells" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FirstAir" type="Node2D" parent="BlockedCells"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 23, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell2" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 58, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell3" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 93, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell4" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 128, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell5" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 163, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell6" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 198, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell7" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 233, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell8" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 268, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell9" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 303, 22 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell10" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 268, 57 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell11" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 303, 57 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell12" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 268, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell13" parent="BlockedCells/FirstAir" instance=ExtResource( 11 )]
+position = Vector2( 303, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FirstPlatform" type="Node2D" parent="BlockedCells"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell" parent="BlockedCells/FirstPlatform" instance=ExtResource( 11 )]
+position = Vector2( 23, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell2" parent="BlockedCells/FirstPlatform" instance=ExtResource( 11 )]
+position = Vector2( 58, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell3" parent="BlockedCells/FirstPlatform" instance=ExtResource( 11 )]
+position = Vector2( 93, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell4" parent="BlockedCells/FirstPlatform" instance=ExtResource( 11 )]
+position = Vector2( 128, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell5" parent="BlockedCells/FirstPlatform" instance=ExtResource( 11 )]
+position = Vector2( 163, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell6" parent="BlockedCells/FirstPlatform" instance=ExtResource( 11 )]
+position = Vector2( 198, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell7" parent="BlockedCells/FirstPlatform" instance=ExtResource( 11 )]
+position = Vector2( 233, 92 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SecondAir" type="Node2D" parent="BlockedCells"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell8" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 23, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell9" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 58, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell10" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 93, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell11" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 128, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell12" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 163, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell13" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 198, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell14" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 233, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell15" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 268, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell16" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 303, 127 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell17" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 23, 162 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell18" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 58, 162 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell19" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 23, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell20" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 58, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell21" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 23, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell22" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 58, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell23" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 93, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell24" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 128, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell25" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 163, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell26" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 198, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell27" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 233, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell28" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 268, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell29" parent="BlockedCells/SecondAir" instance=ExtResource( 11 )]
+position = Vector2( 303, 232 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SecondPlatform" type="Node2D" parent="BlockedCells"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell8" parent="BlockedCells/SecondPlatform" instance=ExtResource( 11 )]
+position = Vector2( 93, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell9" parent="BlockedCells/SecondPlatform" instance=ExtResource( 11 )]
+position = Vector2( 128, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell10" parent="BlockedCells/SecondPlatform" instance=ExtResource( 11 )]
+position = Vector2( 163, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell11" parent="BlockedCells/SecondPlatform" instance=ExtResource( 11 )]
+position = Vector2( 198, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell12" parent="BlockedCells/SecondPlatform" instance=ExtResource( 11 )]
+position = Vector2( 233, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell13" parent="BlockedCells/SecondPlatform" instance=ExtResource( 11 )]
+position = Vector2( 268, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell14" parent="BlockedCells/SecondPlatform" instance=ExtResource( 11 )]
+position = Vector2( 303, 197 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThirdPlatform" type="Node2D" parent="BlockedCells"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell8" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 23, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell9" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 58, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell10" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 93, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell11" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 128, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell12" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 163, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell13" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 198, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell14" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 233, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell15" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 268, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlockedCell16" parent="BlockedCells/ThirdPlatform" instance=ExtResource( 11 )]
+position = Vector2( 303, 302 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CellSelector" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -35 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FinishLine" type="Area2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
+position = Vector2( 348, 267 )
+shape = SubResource( 16 )
